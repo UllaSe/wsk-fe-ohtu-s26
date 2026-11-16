@@ -16,13 +16,18 @@ const Layout = () => {
             <li>
               <Link to="/upload">Upload</Link>
             </li>
+            <li>
+              <Link to="/demo">Demo</Link>
+            </li>
           </ul>
         </nav>
       </header>
       <main>
         <Outlet />
       </main>
-      <footer><p>&copy; teacher 2026</p></footer>
+      <footer>
+        <p>&copy; teacher 2026</p>
+      </footer>
     </>
   );
 };
