@@ -24,6 +24,7 @@ const Single = () => {
         </video>
       )}
       <p>{item.description}</p>
+      <p>Owner: {item.username}</p>
       {/* TODO: add go back button here*/}
       <button onClick={() => navigate(-1)}>Go back</button>
     </>
