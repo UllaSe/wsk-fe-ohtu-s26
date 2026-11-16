@@ -3,6 +3,8 @@ import MediaRow from '../components/MediaRow';
 import SingleView from '../components/SingleView';
 import {fetchData} from '../utils/fetchData';
 
+const MEDIA_API = import.meta.env.VITE_MEDIA_API;
+
 const Home = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   // ensimmäisessä renderöinnissä dataa ei ole vielä haettu
@@ -11,7 +13,9 @@ const Home = () => {
 
   useEffect(() => {
     const getMedia = async () => {
-      const json = await fetchData('test.json');
+      // 1. haetaan ensin pelkkä mediadata
+      const json = await fetchData(MEDIA_API + '/media');
+      console.log(json);
       setMediaArray(json);
     };
     getMedia();
@@ -31,6 +35,7 @@ const Home = () => {
             <th>Created</th>
             <th>Size</th>
             <th>Type</th>
+            <th>Info</th>
           </tr>
         </thead>
         <tbody>
