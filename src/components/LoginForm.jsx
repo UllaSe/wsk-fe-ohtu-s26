@@ -1,25 +1,34 @@
-import {useState} from 'react';
+import useForm from '../hooks/formHooks';
+import {useAuthentication} from '../hooks/apiHooks';
+import {useNavigate} from 'react-router';
 
 const LoginForm = () => {
-  const [inputs, setInputs] = useState({
+  const postlogin = useAuthentication();
+  const navigate = useNavigate();
+
+  const initValues = {
     username: '',
     password: '',
-  });
+  };
 
-  const handleSubmit = (event) => {
-    if (event) {
-      event.preventDefault();
-      console.log('INPUTS', inputs);
+  const doLogin = async (formData) => {
+    console.log('HOOKIN palauttama formdata', formData);
+    // TODO: add login functionalities here
+    // use postlogin funktiota ja tee kutsu rajapintaan
+    try {
+      const userInfo = await postlogin(formData);
+      console.log(userInfo);
+      localStorage.setItem('token', userInfo.token);
+      navigate('/');
+    } catch (error) {
+      console.log('Error', error);
     }
+
+    // ullis
+    // ull1s
   };
 
-  const handleInputChange = (event) => {
-    console.log(event.target.name, event.target.value);
-    setInputs((inputs) => ({
-      ...inputs,
-      [event.target.name]: event.target.value,
-    }));
-  };
+  const {handleInputChange, handleSubmit} = useForm(doLogin, initValues);
 
   return (
     <>

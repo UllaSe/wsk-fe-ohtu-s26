@@ -36,20 +36,40 @@ const useMedia = () => {
   return {mediaArray};
 };
 
-
 /**
  * Auth/user endpoints
  */
 const useUser = () => {
-
   const getUserInformation = async (userId) => {
     const user = await fetchData(`${AUTH_API}/users/${userId}`);
     return user;
   };
 
   return {getUserInformation};
+};
 
+const useAuthentication = () => {
+
+  const postLogin = async (inputs) => {
+
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inputs),
+    };
+    const loginResult = await fetchData(
+      import.meta.env.VITE_AUTH_API + '/auth/login',
+      fetchOptions,
+    );
+    return loginResult;
+  };
+
+
+  return postLogin;
 };
 
 
-export {useMedia, useUser};
+
+export {useMedia, useUser, useAuthentication};
