@@ -1,17 +1,37 @@
+import {useState} from 'react';
+
 const LoginForm = () => {
+  const [inputs, setInputs] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleSubmit = (event) => {
+    if (event) {
+      event.preventDefault();
+      console.log('INPUTS', inputs);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    console.log(event.target.name, event.target.value);
+    setInputs((inputs) => ({
+      ...inputs,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
   return (
     <>
       <h1>Login</h1>
-      <form onSubmit={() => {
-        console.log('sending form...')
-      }}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="loginuser">Username</label>
           <input
             name="username"
             type="text"
             id="loginuser"
-            onChange={() => {}}
+            onChange={handleInputChange}
             autoComplete="username"
           />
         </div>
@@ -21,7 +41,7 @@ const LoginForm = () => {
             name="password"
             type="password"
             id="loginpassword"
-            onChange={() => {}}
+            onChange={handleInputChange}
             autoComplete="current-password"
           />
         </div>
