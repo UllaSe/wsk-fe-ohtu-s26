@@ -1,11 +1,7 @@
 import useForm from '../hooks/formHooks';
-import {useAuthentication} from '../hooks/apiHooks';
-import {useNavigate} from 'react-router';
 import {useUserContext} from '../hooks/conxtextHooks';
 
 const LoginForm = () => {
-  const postlogin = useAuthentication();
-  const navigate = useNavigate();
   const {handleLogin} = useUserContext();
 
   const initValues = {
